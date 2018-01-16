@@ -1,21 +1,21 @@
 # 网易云音乐爬虫
 一个简单的爬虫，可以得到网易云音乐的评论数，并由评论从高到低展示出来。
 一个最简单的爬虫的流程：
-![]()
+![](https://github.com/yuanrw/MusicCrawler/blob/master/pic/crawler1.jpg)
 ## 目录
 ```
 ├── com.yrw.crawler
-├── 	Application.java			//启动Spring boot
-├── 	Crawler.java				// 爬虫的接口，定义了爬虫重要方法
-├── 	HtmlFetcher.java			//获取Html页面的方法
-├── 	HtmlParser.javar			//解析Html页面的方法
-├── 	com.yrw.crawler.impl
-├── 		MultiCrawlerThread.java			//爬虫的流程
-├── 		MultiCrawlerWithMybatis.java		//爬虫的实现类，用mybatis实现
-├── 	com.yrw.crawler.controller			//controller层，用于展示爬虫的结果
-├── 	com.yrw.crawler.mapper			// mapper层，用mybatis实现数据持久化
-├── 	com.yrw.model			// 数据模型
-├── 	com.yrw.task			//定时任务
+├──   Application.java			//启动Spring boot
+├──   Crawler.java				// 爬虫的接口，定义了爬虫重要方法
+├──   HtmlFetcher.java			//获取Html页面的方法
+├──   HtmlParser.javar			//解析Html页面的方法
+├──   com.yrw.crawler.impl
+├──     MultiCrawlerThread.java			//爬虫的流程
+├── 	MultiCrawlerWithMybatis.java		//爬虫的实现类，用mybatis实现
+├──   com.yrw.crawler.controller			//controller层，用于展示爬虫的结果
+├──   com.yrw.crawler.mapper			// mapper层，用mybatis实现数据持久化
+├──   com.yrw.model			// 数据模型
+├──   com.yrw.task			//定时任务
 ```
 #### 建立4个表：
 ```
@@ -133,18 +133,18 @@ public synchronized void saveWebPage(WebPage webPage) {
 
 - #### 关于如何得到评论数：
 打开谷歌浏览器开发者工具，在xhr请求中寻找得到评论数的请求，可以找到
-![]()
+![](https://github.com/yuanrw/MusicCrawler/blob/master/pic/crawler2.jpg)
 观察这个请求，发现是一个post请求，参数是：
-![]()
-![]()
+![](https://github.com/yuanrw/MusicCrawler/blob/master/pic/crawler3.jpg)
+![](https://github.com/yuanrw/MusicCrawler/blob/master/pic/crawler4.jpg)
 只要得到这两个参数，再post请求发送过去就可以得到评论数了。
 所以问题转换为：如何得到这两个参数。
 
 查看一下发起请求的是core.js，
-![]()
+![](https://github.com/yuanrw/MusicCrawler/blob/master/pic/crawler5.jpg)
 把这个地址放到迅雷里面，下载这个js文件，美化一下。
 在文件中搜索 "encSecKey"，可以找到：
-![]()
+![](https://github.com/yuanrw/MusicCrawler/blob/master/pic/crawler6.jpg)
 ```
 var bAN7G = window.asrsea(JSON.stringify(j5o), bnQ3x(["流泪", "强"]), bnQ3x(Mc1x.md), bnQ3x(["爱心", "女孩", "惊恐", "大笑"]));
 e5j.data = k5p.dh7a({
@@ -153,7 +153,7 @@ e5j.data = k5p.dh7a({
 })
 ```
 bAN7G变量是通过window.asrsea()函数得到的，共有四个参数，我称之为**参数1，参数2，参数3，参数4**。于是搜索这个函数，可以找到：
-![]()
+![](https://github.com/yuanrw/MusicCrawler/blob/master/pic/crawler7.jpg)
 **encText**即post的第一个参数param，**encSecKey**即第二个参数encSecKey。
 
 通过查看上面的函数可以发现：
