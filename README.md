@@ -8,7 +8,7 @@
 ├──   Application.java			//启动Spring boot
 ├──   Crawler.java				// 爬虫的接口，定义了爬虫重要方法
 ├──   HtmlFetcher.java			//获取Html页面的方法
-├──   HtmlParser.javar			//解析Html页面的方法
+├──   HtmlParser.java			//解析Html页面的方法
 ├──   com.yrw.crawler.impl
 ├──     MultiCrawlerThread.java			//爬虫的流程
 ├── 	MultiCrawlerWithMybatis.java		//爬虫的实现类，用mybatis实现
@@ -55,7 +55,7 @@ create table song_page(
 
 ### 详细流程
 - #### 初始化
-初始化所有的分类信息，在运行爬虫。
+初始化所有的分类信息，再运行爬虫。
 ```
 public interface Crawler {
 
@@ -173,6 +173,8 @@ text = "{\"username\": \"\", \"rememberLogin\": \"true\", \"password\": \"\"}";
 参数3："00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b3ece0462db0a22b8e7"
 参数4："0CoJUm6Qyw8W8jud"
 ```
+用java模拟加密的过程，提交post请求即可。
+详细代码在HtmlParser.java文件内。
 
 参考资料：
 
